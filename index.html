@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Congregation Counter</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+    <style>
+        #two,
+        #three {
+            display: none;
+        }
+        
+        #msg_one {
+            display: none;
+        }
+        
+        #msg_two {
+            display: none;
+        }
+        
+        #msg_three {
+            display: none;
+        }
+    </style>
+    <div style="position: absolute; top: 30%; bottom: auto; color: #f00; left: 48%; display: none; " id="shspin ">
+        <i class="fa fa-adjust fa-spin " style="font-size:50px; "></i>
+    </div>
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <small><a href="#" class="h1"><b>CONGRE</b>count</a></small>
+            </div>
+            <div class="box-header text-center" id="headerName"></div>
+            <div class="box-header text-center" id="headerAdd"></div>
+
+            <div id="one">
+                <div class="card-body">
+                    <div class="box-body">
+                        <div class="input-group mb-3">
+                            <input type="text" id="churchName" class="form-control" placeholder="Event Name">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-fw fa-church"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" id="churchAdd" class="form-control" placeholder="Event Address">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-map"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="row">
+                            <div class="col-4">
+                            </div>
+                            <div class="col-4">
+                            </div>
+                            <div class="col-4">
+                                <button id="next_two" type="button" onclick="two()" class="btn btn-success btn-block"><i class="fa fa-forward"></i></button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="two">
+                <div class="card-body">
+                    <div class="box-body">
+                        <div style="position: absolute; top: 30%; bottom: auto; color: #f00; left: 48%; display: none; " id="shspin"><i class="fa fa-adjust fa-spin " style="font-size:50px; "></i></div>
+                        <!---- Start form -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h1 class="text-center"> <small id="counter"> 0 </small> * <i class="fas fa-users text-success"></i></h1>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row ">
+                            <div class="col-sm-6 text-center" style="border: rgb(30, 4, 122); ">
+                                <h2><small id="counterMale">0</small> * <i class="fas fa-male text-info"></i></h2>
+                                <button type="button " class="btn btn-primary btn-block" id="increment-btn" onClick="incrementM()"><h3><i class="fas fa-male "></i> <i class="fas fa-hand-pointer "></i></h3></button>
+                            </div>
+                            <div class="col-sm-6 text-center ">
+                                <h2><small id="counterFemale">0</small> * <i class="fas fa-female text-warning"></i></h2>
+                                <button type="button " class="btn btn-warning btn-block" id="increment-btn" onClick="incrementF()"><h3><i class="fas fa-female "></i> <i class="fas fa-hand-pointer "></i></h3></button>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row ">
+
+                            <div class="col-sm-3 text-center ">
+
+                            </div>
+                            <div class="col-sm-6 " style="border: rgb(30, 4, 122); ">
+                                <button type="button " class="btn btn-success btn-block " id="save-btn " onclick="Javascript:save() "><h3><i class="fas fa-save "></i> SAVE</h3></button>
+                            </div>
+                            <div class="col-sm-3 text-center " id="message_one "></div>
+                        </div>
+                        <div class="row " text-center>
+                            <div class="col-sm-4 text-center " style="margin: 20px; ">
+                                <button type="button " class="btn btn-danger btn-block " id="eye-btn " onclick="see() "><h3><i class="fas fa-eye "></i></h3></button>
+                            </div>
+                            <div class="col-sm-4 text-center " style="margin: 20px; ">
+                                <button type="button " class="btn btn-danger btn-block " id="sync-btn " onclick="reload() "><h3><i class="fas fa-sync-alt "></i></h3></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <br>
+            <div id="three">
+                <div id="nameit"></div>
+                <div class="card-body text-center">
+                    <table class=" table table-bordered table-striped responsive ">
+                        <thead>
+                            <tr>
+                                <td><b class=" text-danger ">S/N</b></td>
+                                <td><b><small><i class="fas fa-male text-primary"></i></small><i class="fas fa-male text-primary"></i><small><i class="fas fa-male text-primary"></i></small></b></td>
+                                <td><b><small><i class="fas fa-female text-warning"></i></small><i class="fas fa-female text-warning"></i><small><i class="fas fa-female text-warning"></i></small></b></td>
+                                <td><b><i class="fas fa-users text-success"></i></b></td>
+                            </tr>
+                        </thead>
+                        <tbody id="results">
+                        </tbody>
+                    </table>
+                    &nbsp;<br/>
+                </div>
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-4">
+                        </div>
+                        <div class="col-4">
+                        </div>
+                        <div class="col-4">
+                            <button id="previous_two" type="button" onclick="two()" class="btn btn-danger btn-block"><i class="fa fa-backward"></i></button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js "></script>
+<script src="initial.js "></script>
+<!-- SweetAlert2 -->
+<script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="plugins/toastr/toastr.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+<!-- DataTables  & Plugins -->
+<script src="plugins/datatables/jquery.dataTables.min.js "></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js "></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js "></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js "></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js "></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js "></script>
+<script src="plugins/jszip/jszip.min.js "></script>
+<script src="plugins/pdfmake/pdfmake.min.js "></script>
+<script src="plugins/pdfmake/vfs_fonts.js "></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js "></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js "></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js "></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js "></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js "></script>
+<!-- Page specific script -->
+<script>
+    $(function() {
+        $("#example1 ").DataTable({
+            "responsive ": true,
+            "lengthChange ": false,
+            "autoWidth ": false,
+            "buttons ": ["copy ", "csv ", "excel ", "pdf ", "print ", "colvis "]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging ": true,
+            "lengthChange ": false,
+            "searching ": true,
+            "ordering ": true,
+            "info ": true,
+            "autoWidth ": false,
+            "responsive ": true,
+        });
+    });
+</script>
+<script>
+    $(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        $('.toastrDefaultInfo').ready(function() {
+            toastr.success(message1);
+        });
+    });
+</script>
+
+</html>
